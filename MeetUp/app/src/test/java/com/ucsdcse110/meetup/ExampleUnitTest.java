@@ -1,4 +1,4 @@
-package com.mafiekiller.meetup;
+package com.ucsdcse110.meetup;
 
 import org.junit.Test;
 
