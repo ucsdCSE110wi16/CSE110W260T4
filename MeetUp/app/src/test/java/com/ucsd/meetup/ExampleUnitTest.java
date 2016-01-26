@@ -1,4 +1,4 @@
-package com.ucsdcse110.meetup;
+package com.ucsd.meetup;
 
 import org.junit.Test;
 
