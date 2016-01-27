@@ -206,9 +206,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    private boolean isEmailValid(String username) {
+    private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return username.length() > 3;
+        if((email.contains(".com") || email.contains(".cn")
+                || (email.contains(".edu")) && email.contains("@"))) {
+            return email.length() > 3;
+        }
+            return false;
     }
 
     private boolean isPasswordValid(String password) {
@@ -312,11 +316,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mName;
+        private final String mEmail;
         private final String mPassword;
 
-        UserLoginTask(String name, String password) {
-            mName = name;
+        UserLoginTask(String email, String password) {
+            mEmail = email;
             mPassword = password;
         }
 
@@ -333,7 +337,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
-                if (pieces[0].equals(mName)) {
+                if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
                 }
@@ -341,9 +345,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             // TODO: register the new account here.
 
-
-            ParseObject testObject = new ParseObject("Acounts");
-            testObject.put(mName, mPassword);
+            ParseObject testObject = new ParseObject("User Accounts");
+            testObject.put("email", mEmail);
+            testObject.put("password", mPassword);
             testObject.saveInBackground();
 
             return true;
