@@ -1,4 +1,4 @@
-package com.ucsd.meetup;
+package com.example.mark.tutorialstuff;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -19,7 +19,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,21 +29,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
-import com.parse.LogInCallback;
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
-import static com.parse.ParseACL.*;
 
 /**
  * A login screen that offers login via email/password.
@@ -69,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mUserName;
+    private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -78,18 +66,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-        // Add your initialization code here
-        Parse.initialize(this);
-        ParseUser.enableAutomaticUser();
-        ParseACL defaultACL = new ParseACL();
-        // Optionally enable public read access.
-        // defaultACL.setPublicReadAccess﴾true﴿;
-        setDefaultACL(defaultACL, true);
-
         // Set up the login form.
-        mUserName = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -132,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mUserName, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -171,11 +149,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         // Reset errors.
-        mUserName.setError(null);
+        mEmailView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mUserName.getText().toString();
+        String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -190,12 +168,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mUserName.setError(getString(R.string.error_field_required));
-            focusView = mUserName;
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mUserName.setError(getString(R.string.error_invalid_email));
-            focusView = mUserName;
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailView;
             cancel = true;
         }
 
@@ -214,11 +192,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        if((email.contains(".com") || email.contains(".cn")
-                || (email.contains(".edu")) && email.contains("@"))) {
-            return email.length() > 3;
-        }
-            return false;
+        return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
@@ -302,7 +276,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mUserName.setAdapter(adapter);
+        mEmailView.setAdapter(adapter);
     }
 
 
@@ -341,48 +315,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            /*ParseQuery<ParseObject> query = ParseQuery.getQuery("UserAccounts");
-            query.whereEqualTo("email", mEmail);
-            query.findInBackground(new FindCallback<ParseObject>() {
-                @Override
-                public void done(List<ParseObject> objects, ParseException e) {
-                    if (e == null) {
-                        Log.d("email", "successfully logged in" + '\n');
-                    }
-                    else {
-                        Log.d("email", "creating account" + '\n');
-
-                    }
+            for (String credential : DUMMY_CREDENTIALS) {
+                String[] pieces = credential.split(":");
+                if (pieces[0].equals(mEmail)) {
+                    // Account exists, return true if the password matches.
+                    return pieces[1].equals(mPassword);
                 }
-            });*/
+            }
 
             // TODO: register the new account here.
-            ParseUser user = new ParseUser();
-            user.setUsername(mEmail);
-            user.setPassword(mPassword);
-            user.setEmail(mEmail);
-
-            user.signUpInBackground(new SignUpCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("username", "success!" + '\n');
-                    } else {
-                        ParseUser.logInInBackground(mEmail, mPassword, new LogInCallback() {
-                            @Override
-                            public void done(ParseUser user, ParseException e) {
-                                if (user != null) {
-                                    Log.d("username", "success! logged in" + '\n');
-                                } else {
-                                    Log.d("username", "no good! no sign in" + '\n');
-                                }
-                            }
-                        });
-                    }
-                }
-            });
-
-
             return true;
         }
 
