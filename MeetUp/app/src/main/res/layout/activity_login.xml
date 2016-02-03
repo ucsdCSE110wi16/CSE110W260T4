@@ -72,6 +72,16 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ForTest"
+                android:id="@+id/button"
+                android:layout_gravity="center_horizontal"
+                android:onClick="goToMainActivity"
+                android:nestedScrollingEnabled="true" />
+
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
