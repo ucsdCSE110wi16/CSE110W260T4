@@ -18,4 +18,6 @@
 
         completions."
     </string>
+    <string name="title_activity_create_profile">CreateProfile</string>
+    <string name="firstName">Last Name</string>
 </resources>

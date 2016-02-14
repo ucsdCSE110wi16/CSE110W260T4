@@ -3,6 +3,7 @@ package com.ucsd.meetup;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -57,13 +58,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
@@ -109,6 +103,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        Button mSignUpButton = (Button) findViewById(R.id.registerIn);
+        mSignUpButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, CreateProfile.class));
             }
         });
 
@@ -182,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -341,20 +343,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            /*ParseQuery<ParseObject> query = ParseQuery.getQuery("UserAccounts");
-            query.whereEqualTo("email", mEmail);
-            query.findInBackground(new FindCallback<ParseObject>() {
-                @Override
-                public void done(List<ParseObject> objects, ParseException e) {
-                    if (e == null) {
-                        Log.d("email", "successfully logged in" + '\n');
-                    }
-                    else {
-                        Log.d("email", "creating account" + '\n');
-
-                    }
-                }
-            });*/
 
             // TODO: register the new account here.
             ParseUser user = new ParseUser();
@@ -362,12 +350,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             user.setPassword(mPassword);
             user.setEmail(mEmail);
 
-            user.signUpInBackground(new SignUpCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("username", "success!" + '\n');
-                    } else {
+            //user.signUpInBackground(new SignUpCallback() {
+            //    @Override
+            //    public void done(ParseException e) {
+            //        if (e == null) {
+            //            Log.d("username", "success!" + '\n');
+            //        } else {
                         ParseUser.logInInBackground(mEmail, mPassword, new LogInCallback() {
                             @Override
                             public void done(ParseUser user, ParseException e) {
@@ -375,12 +363,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     Log.d("username", "success! logged in" + '\n');
                                 } else {
                                     Log.d("username", "no good! no sign in" + '\n');
+
                                 }
                             }
                         });
-                    }
-                }
-            });
+            //       }
+            //    }
+            //});
 
 
             return true;
