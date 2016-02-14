@@ -15,12 +15,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
-            android:name="com.parse.APPLICATION_ID"
-            android:value="@string/parse_app_id" />
+        android:name="com.parse.APPLICATION_ID"
+        android:value="@string/parse_app_id" />
         <meta-data
-            android:name="com.parse.CLIENT_KEY"
-            android:value="@string/parse_client_key" />
+        android:name="com.parse.CLIENT_KEY"
+        android:value="@string/parse_client_key" />
 
         <activity
             android:name=".LoginActivity"
@@ -40,6 +41,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ucsd.meetup.LoginActivity" />
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".create_activity_Activity"
+            android:label="@string/title_activity_create_activity_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
