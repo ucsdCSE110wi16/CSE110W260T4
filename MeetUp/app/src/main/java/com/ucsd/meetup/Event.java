@@ -6,7 +6,7 @@
  (get - display on screen)
  */
 
- package MeetUp;
+package com.ucsd.meetup;
 
  import java.io.Serializable;
 
@@ -48,7 +48,7 @@
 
     public String getEvDay()
     {
-      //return mm, dd, yyyy, day
+      return mm+ dd+ yyyy+ day;
     }
 
     public String getEvTime()
@@ -80,7 +80,7 @@
     {
       this.mm = evMM;
       this.dd = evDD;
-      this.yy = evYY;
+      this.yyyy = evYY;
       //this.day = pulled from clendar
 
     }
