@@ -11,7 +11,7 @@ package com.ucsd.meetup;
  import java.io.Serializable;
 
  /*
-  * @author yining_yang
+  * !!! Need PARSE class to store Event details !!!
   */
 
 

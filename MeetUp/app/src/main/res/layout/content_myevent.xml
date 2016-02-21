@@ -1,25 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ucsd.meetup.myevent_Activity"
+    tools:showIn="@layout/activity_myevent">
+
 
     <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:id="@+id/spinner"
-        android:layout_gravity="center_horizontal" />
+        android:layout_alignParentTop="true"
+        android:contextClickable="false"
+        android:clickable="true"
+        android:longClickable="true" />
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="385dp"
-        android:id="@+id/listView" />
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:id="@+id/listView"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/spinner"
+        android:clickable="false"
+        android:contextClickable="false" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Events"
-        android:id="@+id/button3"
-        android:layout_gravity="center_horizontal" />
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="Profile"
+        android:id="@+id/profile"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:clickable="true" />
 
-</LinearLayout>
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="Events"
+        android:id="@+id/events"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="New Event"
+        android:id="@+id/newEvent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/listView"
+        android:layout_alignEnd="@+id/listView" />
+</RelativeLayout>

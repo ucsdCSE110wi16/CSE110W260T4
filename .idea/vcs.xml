@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
+<<<<<<< HEAD:.idea/vcs.xml
     <mapping directory="" vcs="Git" />
+=======
+    <mapping directory="" vcs="" />
+>>>>>>> 4bad560e71e19413bc90382e62f5210f15331433:MeetUp/.idea/vcs.xml
   </component>
 </project>
