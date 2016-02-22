@@ -31,6 +31,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
@@ -67,15 +70,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+    public static boolean isLocalDatastoreEnabled = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-        // Add your initialization code here
-        Parse.initialize(this);
+        if (isLocalDatastoreEnabled == false) {
+            // Enable Local Datastore.
+            Parse.enableLocalDatastore(this);
+            // Add your initialization code here
+            Parse.initialize(this);
+            isLocalDatastoreEnabled = true;
+        }
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         // Optionally enable public read access.
@@ -103,11 +116,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+                if (mAuthTask != null && mAuthTask.isAbleToLogin == true) {
+                    startActivity(new Intent(LoginActivity.this, myevent.class));
+                }
             }
         });
 
         Button mSignUpButton = (Button) findViewById(R.id.registerIn);
-        mSignUpButton.setOnClickListener(new View.OnClickListener(){
+        mSignUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, CreateProfile.class));
@@ -116,6 +132,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public void goToMainActivity(View view) {
@@ -140,7 +159,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
             Snackbar.make(mUserName, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
+                    .setAction(android.R.string.ok, new OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
                         public void onClick(View v) {
@@ -222,11 +241,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        if((email.contains(".com") || email.contains(".cn")
+        if ((email.contains(".com") || email.contains(".cn")
                 || (email.contains(".edu")) && email.contains("@"))) {
             return email.length() > 3;
         }
-            return false;
+        return false;
     }
 
     private boolean isPasswordValid(String password) {
@@ -313,6 +332,46 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mUserName.setAdapter(adapter);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Login Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.ucsd.meetup/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Login Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.ucsd.meetup/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -332,6 +391,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private boolean isAbleToLogin = false;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -362,22 +422,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             //        if (e == null) {
             //            Log.d("username", "success!" + '\n');
             //        } else {
-                        ParseUser.logInInBackground(mEmail, mPassword, new LogInCallback() {
-                            @Override
-                            public void done(ParseUser user, ParseException e) {
-                                if (user != null) {
-                                    Log.d("username", "success! logged in" + '\n');
-                                } else {
-                                    Log.d("username", "no good! no sign in" + '\n');
+            ParseUser.logInInBackground(mEmail, mPassword, new LogInCallback() {
+                @Override
+                public void done(ParseUser user, ParseException e) {
+                    if (user != null) {
+                        Log.d("username", "success! logged in" + '\n');
+                        isAbleToLogin = true;
 
-                                }
-                            }
-                        });
+
+                    } else {
+                        Log.d("username", "no good! no sign in" + '\n');
+
+                    }
+                }
+            });
             //       }
             //    }
             //});
-
-
             return true;
         }
 
