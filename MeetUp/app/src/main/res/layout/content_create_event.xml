@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ucsd.meetup.create_activity_Activity"
-    tools:showIn="@layout/activity_create_activity_">
+    tools:showIn="@layout/activity_create_event">
 
     <EditText
         android:layout_width="400dp"

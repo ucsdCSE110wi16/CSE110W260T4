@@ -21,6 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_create_activity_" />
+    <include layout="@layout/content_create_event" />
 
 </android.support.design.widget.CoordinatorLayout>
