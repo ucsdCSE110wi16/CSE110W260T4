@@ -89,9 +89,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ForTest"
-                android:id="@+id/button"
+                android:id="@+id/ForTest"
                 android:layout_gravity="center_horizontal"
-                android:onClick="goToMainActivity"
+                android:onClick="goToCreateEvent"
                 android:nestedScrollingEnabled="true" />
 
         </LinearLayout>

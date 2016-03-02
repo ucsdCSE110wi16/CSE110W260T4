@@ -45,15 +45,18 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
+        <!-- Create Event Activity -->
         <activity
-            android:name=".create_activity_Activity"
-            android:label="@string/title_activity_create_activity_"
+            android:name=".CreateEvent"
+            android:label="CreateEvent"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".myevent"
+            android:name=".MyEvent"
             android:label="title_activity_my_event"
             android:theme="@style/AppTheme.NoActionBar"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
