@@ -42,15 +42,11 @@
                 android:value="com.ucsd.meetup.LoginActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".create_activity_Activity"
             android:label="@string/title_activity_create_activity_"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".myevent"
+            android:name=".MyEvent"
             android:label="title_activity_my_event"
             android:theme="@style/AppTheme.NoActionBar"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->

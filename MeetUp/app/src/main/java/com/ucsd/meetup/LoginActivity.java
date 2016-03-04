@@ -34,15 +34,11 @@ import android.widget.TextView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 attemptLogin();
 //                if (mAuthTask != null && mAuthTask.isAbleToLogin == true) {
 //                    Log.d("user", "mAuthTask:AbleToLogin: " + mAuthTask.isAbleToLogin);
-//                    startActivity(new Intent(LoginActivity.this, myevent.class));
+//                    startActivity(new Intent(LoginActivity.this, MyEvent.class));
 //                }
             }
         });
@@ -139,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     public void goToMainActivity(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MyEvent.class);
         startActivity(intent);
     }
 
@@ -428,9 +424,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
                         Log.d("username", "success! logged in" + '\n');
-                        startActivity(new Intent(LoginActivity.this, myevent.class));
-
-
+                        startActivity(new Intent(LoginActivity.this, MyEvent.class));
 
                     } else {
                         Log.d("username", "no good! no sign in" + '\n');

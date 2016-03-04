@@ -30,23 +30,7 @@ public class CreateProfile extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
-        mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
-        mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
-        mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
-        mEmail = (EditText) findViewById(R.id.emailIn);
-        mPassword = (EditText) findViewById(R.id.passwordIn);
 
         Button mCancelButton = (Button) findViewById(R.id.cancelBtn);
         mCancelButton.setOnClickListener(new View.OnClickListener(){
@@ -108,8 +92,15 @@ public class CreateProfile extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+            mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
+            mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
+            mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
+            mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
+            mEmail = (EditText) findViewById(R.id.emailIn);
+            mPassword = (EditText) findViewById(R.id.passwordIn);
 
             CreateUserTask createUser = new CreateUserTask(email, password, mName, mCity, mState, mZip);
+            createUser.doInBackground();
         }
     }
 

@@ -16,7 +16,7 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/editText2"
+        android:id="@+id/actName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:text="Event"
@@ -28,19 +28,19 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/editText"
         android:layout_marginTop="31dp"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/actName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:text="Where"
-        android:layout_above="@+id/editText3" />
+        android:layout_above="@+id/date" />
 
     <TextView
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/editText3"
+        android:id="@+id/date"
         android:text="When"
-        android:layout_above="@+id/editText4"
+        android:layout_above="@+id/type"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="30dp" />
@@ -49,11 +49,11 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/editText4"
+        android:id="@+id/type"
         android:text="Activity Type"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignStart="@+id/editText3" />
+        android:layout_alignLeft="@+id/date"
+        android:layout_alignStart="@+id/date" />
 
     <TextView
         android:layout_width="400dp"
@@ -62,7 +62,7 @@
         android:id="@+id/editText5"
         android:layout_marginTop="40dp"
         android:text="Description"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/type"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

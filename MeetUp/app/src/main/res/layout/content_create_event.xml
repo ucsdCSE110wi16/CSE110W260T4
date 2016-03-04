@@ -15,29 +15,26 @@
     <EditText
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/actName"
         android:layout_marginTop="26dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Activity Name" />
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/loc"
         android:layout_marginTop="31dp"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/actName"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="Where" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
-        android:text="When"
-        android:layout_above="@+id/editText4"
+        android:id="@+id/date"
+        android:layout_above="@+id/type"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="30dp" />
@@ -45,20 +42,28 @@
     <EditText
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
-        android:text="Activity Type"
+        android:id="@+id/type"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignStart="@+id/editText3" />
+        android:layout_alignLeft="@+id/date"
+        android:layout_alignStart="@+id/date" />
 
     <EditText
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText5"
+        android:id="@+id/description"
         android:layout_marginTop="40dp"
-        android:text="Description"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/type"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:id="@+id/createBtn"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/description"
+        android:layout_alignRight="@+id/description"
+        android:layout_alignEnd="@+id/description" />
 
 </RelativeLayout>
