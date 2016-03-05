@@ -112,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+                //startActivity(new Intent(LoginActivity.this, MyEvent.class));
 //                if (mAuthTask != null && mAuthTask.isAbleToLogin == true) {
 //                    Log.d("user", "mAuthTask:AbleToLogin: " + mAuthTask.isAbleToLogin);
 //                    startActivity(new Intent(LoginActivity.this, MyEvent.class));

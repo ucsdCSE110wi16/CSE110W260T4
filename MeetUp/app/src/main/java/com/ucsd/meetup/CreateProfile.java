@@ -17,6 +17,8 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import java.util.ArrayList;
+
 public class CreateProfile extends AppCompatActivity {
 
     private String mName, mCity, mState, mZip;
@@ -121,6 +123,7 @@ public class CreateProfile extends AppCompatActivity {
     public class CreateUserTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail, mPassword, mName, mCity, mState, mZip;
+        //private ArrayList<create_activity_Activity.CreateEventTask> myEvents[];
 
         CreateUserTask(String email, String password, String name, String city, String state, String zip){
             mEmail = email; mPassword = password; mName = name; mCity = city; mState = state; mZip = zip;
@@ -136,12 +139,14 @@ public class CreateProfile extends AppCompatActivity {
             user.put("city", mCity);
             user.put("state", mState);
             user.put("zip", mZip);
+            //user.put("events", myEvents);
 
             user.signUpInBackground(new SignUpCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.d("username", "Sign up successful");
+                        startActivity(new Intent(CreateProfile.this, create_activity_Activity.class));
                     } else {
                         Log.d("username", "Sign up failed\n");
                         e.printStackTrace();

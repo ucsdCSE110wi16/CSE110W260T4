@@ -1,5 +1,6 @@
 package com.ucsd.meetup;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +17,14 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class create_activity_Activity extends AppCompatActivity {
     private String mActName, mLoc, mDate, mType, mDes;
@@ -39,13 +47,35 @@ public class create_activity_Activity extends AppCompatActivity {
     }
 
     public void attemptCreate(){
+        /* grab user input */
         mActName = ((EditText) findViewById(R.id.actName)).getText().toString();
         mLoc = ((EditText) findViewById(R.id.loc)).getText().toString();
         mDate = ((EditText) findViewById(R.id.date)).getText().toString();
         mType = ((EditText) findViewById(R.id.type)).getText().toString();
         mDes = ((EditText) findViewById(R.id.description)).getText().toString();
-        CreateEventTask createEvent = new CreateEventTask(mActName, mLoc, mDate, mType, mDes);
-        createEvent.doInBackground();
+
+        /* create the event and store into Parse*/
+        CreateEventTask event = new CreateEventTask(mActName, mLoc, mDate, mType, mDes);
+        event.doInBackground();
+
+        /* store into current user's events */
+        ParseUser user = ParseUser.getCurrentUser();
+        List<String> list = user.getList("events");
+        String[] myEvents = list.toArray(new String[list.size()+1]);
+        myEvents[list.size()] = event.getString();
+        user.put("events", Arrays.asList(myEvents));
+        user.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    /* go back to main page */
+                    startActivity(new Intent(create_activity_Activity.this, MyEvent.class));
+                }
+                else{
+                    Log.d("events", e.getMessage());
+                }
+            }
+        });
     }
     public class CreateEventTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -53,6 +83,11 @@ public class create_activity_Activity extends AppCompatActivity {
 
         CreateEventTask(String name, String loc, String date, String type, String desc){
             mActName = name; mLoc = loc; mDate = date; mType = type; mDesc = desc;
+        }
+
+        public String getString(){
+            String retString = this.mActName + ", " + this.mDate + ", " + this.mType;
+            return retString;
         }
 
         protected Boolean doInBackground(Void... params) {
