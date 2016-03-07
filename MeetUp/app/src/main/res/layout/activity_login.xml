@@ -43,7 +43,7 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="test@ucsd.edu"/>
+                    android:text="a@a.com"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -62,7 +62,7 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="123123"/>
+                    android:text="aaaaaa"/>
 
             </android.support.design.widget.TextInputLayout>
 
