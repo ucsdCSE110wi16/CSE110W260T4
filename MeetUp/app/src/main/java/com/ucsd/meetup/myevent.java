@@ -3,7 +3,6 @@ package com.ucsd.meetup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -26,16 +25,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 /**
  * Created by Lawrence on 2/21/2016.
  */
 public class MyEvent extends AppCompatActivity {
+
     private ListView mainListView;
     //private ArrayAdapter<String> listAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myevent);
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -59,10 +62,20 @@ public class MyEvent extends AppCompatActivity {
             }
         });
     }
+//    public void goToCreateEvent(View view) {
+    public void goToCreateEvent() {
 
-    public void createActivity(View view) {
-        // do something in response to button
-        Intent intent = new Intent(this, create_activity_Activity.class );
+        Intent intent = new Intent(this, CreateEvent.class);
         startActivity(intent);
     }
+//    public void createActivity(View view) {
+//        // do something in response to button
+//        Intent intent = new Intent(this, CreateEvent.class );
+//        startActivity(intent);
+//    }
+
+
+
+//    goToCreateEvent
+
 }

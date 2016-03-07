@@ -3,8 +3,6 @@ package com.ucsd.meetup;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -16,8 +14,6 @@ import android.widget.EditText;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-
-import java.util.ArrayList;
 
 public class CreateProfile extends AppCompatActivity {
 
@@ -123,7 +119,7 @@ public class CreateProfile extends AppCompatActivity {
     public class CreateUserTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail, mPassword, mName, mCity, mState, mZip;
-        //private ArrayList<create_activity_Activity.CreateEventTask> myEvents[];
+        //private ArrayList<CreateEvents.CreateEventTask> myEvents[];
 
         CreateUserTask(String email, String password, String name, String city, String state, String zip){
             mEmail = email; mPassword = password; mName = name; mCity = city; mState = state; mZip = zip;
@@ -146,7 +142,7 @@ public class CreateProfile extends AppCompatActivity {
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.d("username", "Sign up successful");
-                        startActivity(new Intent(CreateProfile.this, create_activity_Activity.class));
+                        startActivity(new Intent(CreateProfile.this, CreateEvents.class));
                     } else {
                         Log.d("username", "Sign up failed\n");
                         e.printStackTrace();
