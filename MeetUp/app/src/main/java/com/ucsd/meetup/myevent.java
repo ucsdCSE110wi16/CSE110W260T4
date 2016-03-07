@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
 
 
@@ -28,6 +30,8 @@ public class MyEvent extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
+
+
         mainListView = (ListView) findViewById(R.id.eventsList);
         ArrayList<String> eventsList = new ArrayList<String>();
         //eventsList.addAll(Arrays.asList(events));
@@ -40,18 +44,27 @@ public class MyEvent extends AppCompatActivity {
         filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(filterAdapter);
 
-        Button createActivityBtn = (Button) findViewById(R.id.newEvent);
+        Button createActivityBtn = (Button) findViewById(R.id.createEvent_MyEvent);
         createActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MyEvent.this, CreateEvents.class));
             }
         });
+
+        Button logoutBtn = (Button) findViewById(R.id.logoutButton);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.getCurrentUser().logOut();
+                startActivity(new Intent(MyEvent.this, LoginActivity.class));
+            }
+        });
     }
 //    public void goToCreateEvent(View view) {
     public void goToCreateEvent() {
 
-        Intent intent = new Intent(this, CreateEvent.class);
+        Intent intent = new Intent(this, CreateEvents.class);
         startActivity(intent);
     }
 //    public void createActivity(View view) {

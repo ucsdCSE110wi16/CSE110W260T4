@@ -34,7 +34,7 @@
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="100dp"
+        android:layout_width="85dp"
         android:layout_height="60dp"
         android:text="Profile"
         android:id="@+id/profile"
@@ -45,21 +45,31 @@
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="100dp"
+        android:layout_width="85dp"
         android:layout_height="60dp"
         android:text="Events"
         android:id="@+id/events"
         android:clickable="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toRightOf="@+id/profile"
+        android:layout_toEndOf="@+id/profile" />
 
     <Button
-        android:layout_width="100dp"
+        android:layout_width="85dp"
         android:layout_height="60dp"
         android:text="Create Event"
         android:id="@+id/createEvent_MyEvent"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/eventsList"
-        android:layout_alignEnd="@+id/eventsList" />
+        android:layout_toRightOf="@+id/events"
+        android:layout_toEndOf="@+id/events" />
+
+    <Button
+        android:layout_width="85dp"
+        android:layout_height="60dp"
+        android:text="Logout"
+        android:id="@+id/logoutButton"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/createEvent_MyEvent"
+        android:layout_toEndOf="@+id/createEvent_MyEvent" />
 
 </RelativeLayout>
