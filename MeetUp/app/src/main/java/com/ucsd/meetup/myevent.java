@@ -60,7 +60,18 @@ public class MyEvent extends AppCompatActivity {
                 startActivity(new Intent(MyEvent.this, LoginActivity.class));
             }
         });
+
+        Button profileBtn = (Button) findViewById(R.id.profileButton);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("EDIT PROFILE CLICKED!");
+                startActivity(new Intent(MyEvent.this, EditProfile.class));
+            }
+        });
     }
+
+
 //    public void goToCreateEvent(View view) {
     public void goToCreateEvent() {
 

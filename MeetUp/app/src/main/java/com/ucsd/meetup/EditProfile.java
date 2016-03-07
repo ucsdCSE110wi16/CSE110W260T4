@@ -1,4 +1,5 @@
 package com.ucsd.meetup;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,14 +10,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 
+
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-/**
- * Created by Lawrence on 3/6/2016.
- */
+import java.util.List;
 
 public class EditProfile extends AppCompatActivity {
 
@@ -33,23 +39,69 @@ public class EditProfile extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        /* Changable Fields */
+        /* password,email,fullName,city,state,zip */
+        ParseUser currentUser = ParseUser.getCurrentUser();
+//        ParseObject currentUser = new ParseObject("User");
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
+//        query.whereEqualTo("objectId", (String)(currentUser.getObjectId()));
+
+//        query.getInBackground((String)(currentUser.getObjectId()), new GetCallback<ParseObject>() {
+        query.getInBackground("88mQhJb3Bj", new GetCallback<ParseObject>() {
+
+
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    System.out.println("Retrieved " + object.getString("fullName") + " scores");
+//                    Log.d("score", "Retrieved " + scoreList.size() + " scores");
+                } else {
+                    System.out.println("Error: " + e.getMessage());
+//                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+        System.out.println((String)currentUser.getObjectId() +"; ");
+
+        if (currentUser != null) {
+            // do stuff with the user
+            System.out.println("ASDFJKL;!");
+//            System.out.println("Current User Information: " + query.getString("fullName"));
+//            System.out.println((String)currentUser.getObjectId() +"; " + (String)currentUser.getObjectId().getString("fullName"));
+
+
+//            currentUser.get("city");
+//            currentUser.get("state");
+//            currentUser.get("zip");
+
+        } else {
+            // show the signup or login screen
+            // this should never happen
+        }
+
+        mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
+        mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
+        mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
+        mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
+        mEmail = (EditText) findViewById(R.id.emailIn);
+        mPassword = (EditText) findViewById(R.id.passwordIn);
+
         Button mCancelButton = (Button) findViewById(R.id.cancelBtn);
         mCancelButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(EditProfile.this, LoginActivity.class));
+                startActivity(new Intent(EditProfile.this, MyEvent.class));
             }
         });
 
-        Button mCreateButton = (Button) findViewById(R.id.editBtn);
-        mCreateButton.setOnClickListener(new View.OnClickListener(){
+        Button mEditButton = (Button) findViewById(R.id.editBtn);
+        mEditButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 attemptSignUp();
+
             }
         });
-
-
     }
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -57,6 +109,15 @@ public class EditProfile extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptSignUp() {
+
+        System.out.println("ATTEMPTING TO SIGN UP!");
+        mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
+        mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
+        mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
+        mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
+        mEmail = (EditText) findViewById(R.id.emailIn);
+        mPassword = (EditText) findViewById(R.id.passwordIn);
+
 
         // Reset errors
         mEmail.setError(null);
@@ -92,12 +153,14 @@ public class EditProfile extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
-            mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
-            mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
-            mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
-            mEmail = (EditText) findViewById(R.id.emailIn);
-            mPassword = (EditText) findViewById(R.id.passwordIn);
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+//            mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
+//            mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
+//            mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
+//            mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
+//            mEmail = (EditText) findViewById(R.id.emailIn);
+//            mPassword = (EditText) findViewById(R.id.passwordIn);
 
             CreateUserTask editUser = new CreateUserTask(email, password, mName, mCity, mState, mZip);
             editUser.doInBackground();
@@ -142,7 +205,8 @@ public class EditProfile extends AppCompatActivity {
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.d("username", "Sign up successful");
-                        startActivity(new Intent(EditProfile.this, CreateEvents.class));
+//                        startActivity(new Intent(CreateProfile.this, CreateEvents.class));
+                        startActivity(new Intent(EditProfile.this, MyEvent.class));
                     } else {
                         Log.d("username", "Sign up failed\n");
                         e.printStackTrace();
