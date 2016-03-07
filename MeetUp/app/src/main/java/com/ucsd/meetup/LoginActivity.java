@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     public void goToMainActivity(View view) {
-        Intent intent = new Intent(this, myevent.class);
+        Intent intent = new Intent(this, MyEvents.class);
         startActivity(intent);
     }
 
@@ -418,7 +418,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
                         Log.d("username", "success! logged in" + '\n');
-                        startActivity(new Intent(LoginActivity.this, myevent.class));
+                        startActivity(new Intent(LoginActivity.this, MyEvents.class));
 
                     } else {
                         Log.d("username", "no good! no sign in" + '\n');

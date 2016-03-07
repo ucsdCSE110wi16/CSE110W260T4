@@ -33,7 +33,7 @@ public class CreateEvents extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 attemptCreate();
-//                startActivity(new Intent(CreateEvents.this, myevent.class));
+//                startActivity(new Intent(CreateEvents.this, MyEvents.class));
             }
         });
     }
@@ -61,7 +61,7 @@ public class CreateEvents extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     /* go back to main page */
-                    startActivity(new Intent(CreateEvents.this, myevent.class));
+                    startActivity(new Intent(CreateEvents.this, MyEvents.class));
                 }
                 else{
                     Log.d("events", e.getMessage());
