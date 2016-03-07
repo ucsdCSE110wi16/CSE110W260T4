@@ -52,6 +52,14 @@ public class MyEvents extends AppCompatActivity {
             }
         });
 
+        Button joinBtn = (Button)findViewById(R.id.joinBtn);
+        joinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MyEvents.this, JoinEvents.class));
+            }
+        });
+
         Button logoutBtn = (Button) findViewById(R.id.logoutButton);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

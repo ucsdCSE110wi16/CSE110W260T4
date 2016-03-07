@@ -71,7 +71,7 @@
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:text="Join Event"
-        android:id="@+id/Quit"
+        android:id="@+id/joinBtn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:clickable="true" />
@@ -83,7 +83,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="&lt;"
         android:id="@+id/Back"
-        android:layout_alignTop="@+id/Quit"
+        android:layout_alignTop="@+id/joinBtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:clickable="true" />
