@@ -9,9 +9,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -20,7 +24,6 @@ import java.util.ArrayList;
 public class MyEvents extends AppCompatActivity {
 
     private ListView mainListView;
-    //private ArrayAdapter<String> listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +36,9 @@ public class MyEvents extends AppCompatActivity {
 
 
         mainListView = (ListView) findViewById(R.id.eventsList);
-        ArrayList<String> eventsList = new ArrayList<String>();
-        //eventsList.addAll(Arrays.asList(events));
-        //ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, eventsList);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, eventsList);
+        ParseUser currUser = ParseUser.getCurrentUser();
+        List<String> eventsList = currUser.getList("events");
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, eventsList);
         mainListView.setAdapter(adapter);
 
         Spinner spinner = (Spinner) findViewById(R.id.filter);
@@ -52,7 +54,7 @@ public class MyEvents extends AppCompatActivity {
             }
         });
 
-        Button joinBtn = (Button)findViewById(R.id.joinBtn);
+        Button joinBtn = (Button)findViewById(R.id.events);
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

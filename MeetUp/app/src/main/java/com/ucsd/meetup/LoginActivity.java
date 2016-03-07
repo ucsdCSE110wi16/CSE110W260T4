@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
                     if (mAuthTask != null && mAuthTask.isAbleToLogin == true) {
-                        startActivity(new Intent(LoginActivity.this, MyEvent.class));
+                        startActivity(new Intent(LoginActivity.this, MyEvents.class));
                         }
                 }
                 return false;
