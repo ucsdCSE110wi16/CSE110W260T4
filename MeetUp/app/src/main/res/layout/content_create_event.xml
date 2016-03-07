@@ -18,6 +18,7 @@
         android:id="@+id/actName"
         android:layout_marginTop="26dp"
         android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/date"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:hint="Activity Name" />
@@ -35,8 +36,20 @@
     <EditText
         android:layout_width="400dp"
         android:layout_height="wrap_content"
+        android:id="@+id/date"
+        android:layout_above="@+id/type"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="30dp"
+        android:hint="Date" />
+
+    <EditText
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
         android:id="@+id/type"
         android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/date"
+        android:layout_alignStart="@+id/date"
         android:hint="Activity Type" />
 
     <EditText
@@ -58,18 +71,5 @@
         android:layout_below="@+id/description"
         android:layout_alignRight="@+id/description"
         android:layout_alignEnd="@+id/description" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/date"
-        android:layout_below="@+id/loc"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/loc"
-        android:layout_alignEnd="@+id/loc"
-        android:hint="Date" />
 
 </RelativeLayout>

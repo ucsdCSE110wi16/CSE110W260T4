@@ -101,7 +101,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
-                    return true;
+                    if (mAuthTask != null && mAuthTask.isAbleToLogin == true) {
+                        startActivity(new Intent(LoginActivity.this, MyEvent.class));
+                        }
                 }
                 return false;
             }
@@ -333,13 +335,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Login Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
+                Action.TYPE_VIEW,
+                "Login Page",
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.ucsd.meetup/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
@@ -393,7 +391,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            // Attempt authentication against a network service.
 
             try {
                 // Simulate network access.
@@ -403,7 +401,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
 
-            // TODO: register the new account here.
+            // Register the new account here.
             ParseUser user = new ParseUser();
             user.setUsername(mEmail);
             user.setPassword(mPassword);

@@ -1,5 +1,4 @@
 package com.ucsd.meetup;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,15 +9,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-public class CreateProfile extends AppCompatActivity {
+/**
+ * Created by Lawrence on 3/6/2016.
+ */
+
+public class EditProfile extends AppCompatActivity {
 
     private String mName, mCity, mState, mZip;
     private EditText mEmail, mPassword;
@@ -26,36 +26,30 @@ public class CreateProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_profile);
+        setContentView(R.layout.activity_edit_profile);
         // Puts a "Create Profile" Header on our Sign Up Page
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
-//        mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
-//        mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
-//        mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
-//        mEmail = (EditText) findViewById(R.id.emailIn);
-//        mPassword = (EditText) findViewById(R.id.passwordIn);
-
         Button mCancelButton = (Button) findViewById(R.id.cancelBtn);
         mCancelButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(CreateProfile.this, LoginActivity.class));
+                startActivity(new Intent(EditProfile.this, LoginActivity.class));
             }
         });
 
-        Button mCreateButton = (Button) findViewById(R.id.createBtn);
+        Button mCreateButton = (Button) findViewById(R.id.editBtn);
         mCreateButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 attemptSignUp();
-
             }
         });
+
+
     }
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -63,15 +57,6 @@ public class CreateProfile extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptSignUp() {
-
-        System.out.println("ATTEMPTING TO SIGN UP!");
-        mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
-        mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
-        mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
-        mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
-        mEmail = (EditText) findViewById(R.id.emailIn);
-        mPassword = (EditText) findViewById(R.id.passwordIn);
-
 
         // Reset errors
         mEmail.setError(null);
@@ -107,17 +92,15 @@ public class CreateProfile extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-//            mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
-//            mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
-//            mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
-//            mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
-//            mEmail = (EditText) findViewById(R.id.emailIn);
-//            mPassword = (EditText) findViewById(R.id.passwordIn);
+            mName = ((EditText) findViewById(R.id.fullNameIn)).getText().toString();
+            mCity = ((EditText) findViewById(R.id.cityIn)).getText().toString();
+            mState = ((EditText) findViewById(R.id.stateIn)).getText().toString();
+            mZip = ((EditText) findViewById(R.id.zipIn)).getText().toString();
+            mEmail = (EditText) findViewById(R.id.emailIn);
+            mPassword = (EditText) findViewById(R.id.passwordIn);
 
-            CreateUserTask createUser = new CreateUserTask(email, password, mName, mCity, mState, mZip);
-            createUser.doInBackground();
+            CreateUserTask editUser = new CreateUserTask(email, password, mName, mCity, mState, mZip);
+            editUser.doInBackground();
         }
     }
 
@@ -159,8 +142,7 @@ public class CreateProfile extends AppCompatActivity {
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.d("username", "Sign up successful");
-//                        startActivity(new Intent(CreateProfile.this, CreateEvents.class));
-                        startActivity(new Intent(CreateProfile.this, MyEvent.class));
+                        startActivity(new Intent(EditProfile.this, CreateEvents.class));
                     } else {
                         Log.d("username", "Sign up failed\n");
                         e.printStackTrace();

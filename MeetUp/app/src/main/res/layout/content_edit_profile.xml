@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ucsd.meetup.CreateProfile"
-    tools:showIn="@layout/activity_create_profile">
+    tools:showIn="@layout/activity_edit_profile">
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,8 +33,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:width="500dp"
-        android:text="fullNamein"/>
+        android:width="500dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,8 +43,7 @@
         android:id="@+id/email"
         android:layout_below="@+id/zipIn"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -58,8 +56,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:width="500dp"
-        android:text="test123@ucsd.edu"/>
+        android:width="500dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,16 +86,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:width="175dp"
-        android:layout_alignLeft="@+id/city"
-        android:text="San Diego"/>
+        android:layout_alignLeft="@+id/city" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/stateIn"
         android:layout_below="@+id/state"
-        android:layout_toRightOf="@+id/cityIn"
-        android:text="CA"/>
+        android:layout_toRightOf="@+id/cityIn" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -120,14 +115,13 @@
         android:layout_below="@+id/Password"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:width="500dp"
-        android:text="123123"/>
+        android:width="500dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create"
-        android:id="@+id/createBtn"
+        android:text="Edit"
+        android:id="@+id/editBtn"
         android:width="100dp"
         android:layout_below="@+id/passwordIn"
         android:layout_alignParentLeft="true"
@@ -162,7 +156,6 @@
         android:layout_below="@+id/zipCode"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginRight="175dp"
-        android:text="92091"/>
+        android:layout_marginRight="175dp" />
 
 </RelativeLayout>

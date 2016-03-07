@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
 
 
@@ -55,6 +57,15 @@ public class myevent extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(myevent.this, JoinEvents.class));
+            }
+        });
+
+        Button logoutBtn = (Button) findViewById(R.id.logoutButton);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.getCurrentUser().logOut();
+                startActivity(new Intent(MyEvent.this, LoginActivity.class));
             }
         });
     }
