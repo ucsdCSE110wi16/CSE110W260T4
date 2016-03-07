@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Lawrence on 2/21/2016.
  */
-public class MyEvent extends AppCompatActivity {
+public class MyEvents extends AppCompatActivity {
 
     private ListView mainListView;
     //private ArrayAdapter<String> listAdapter;
@@ -48,7 +48,7 @@ public class MyEvent extends AppCompatActivity {
         createActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyEvent.this, CreateEvents.class));
+                startActivity(new Intent(MyEvents.this, CreateEvents.class));
             }
         });
 
@@ -57,7 +57,7 @@ public class MyEvent extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ParseUser.getCurrentUser().logOut();
-                startActivity(new Intent(MyEvent.this, LoginActivity.class));
+                startActivity(new Intent(MyEvents.this, LoginActivity.class));
             }
         });
     }
