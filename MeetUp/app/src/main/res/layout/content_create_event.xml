@@ -18,7 +18,7 @@
         android:id="@+id/actName"
         android:layout_marginTop="26dp"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/timeDateCreateEvent"
+        android:layout_alignLeft="@+id/date"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:text="Activity Name" />
