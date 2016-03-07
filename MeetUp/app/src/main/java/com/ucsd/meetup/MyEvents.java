@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -24,6 +25,7 @@ import java.util.List;
 public class MyEvents extends AppCompatActivity {
 
     private ListView mainListView;
+    private List<String> eventsList = new ArrayList<>(1000);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class MyEvents extends AppCompatActivity {
 
         mainListView = (ListView) findViewById(R.id.eventsList);
         ParseUser currUser = ParseUser.getCurrentUser();
-        List<String> eventsList = currUser.getList("events");
+        eventsList = currUser.getList("events");
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, eventsList);
         mainListView.setAdapter(adapter);
 
@@ -45,6 +47,40 @@ public class MyEvents extends AppCompatActivity {
         ArrayAdapter<CharSequence> filterAdapter = ArrayAdapter.createFromResource(this, R.array.filterArray, android.R.layout.simple_spinner_item);
         filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(filterAdapter);
+
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = eventsList.get(position);
+                String date = "";
+                String name = "";
+                String type = "";
+                List<ParseObject> listOfEvents = new ArrayList<>();
+                int i = 0;
+                while(item.charAt(i) != '|'){
+                    date += item.charAt(i);
+                    i++;
+                }
+                i++;
+                while(item.charAt(i) != '|'){
+                    name += item.charAt(i);
+                    i++;
+                }
+                i++;
+                while(i < item.length()){
+                    type += item.charAt(i);
+                    i++;
+                }
+                //if(listOfEvents.size() == 1){
+                ParseObject object = new ParseObject("TempEvents");
+                object.put("Date", date);
+                object.put("Name", name);
+                object.saveInBackground();
+                startActivity(new Intent(MyEvents.this, QuitEvent.class));
+                //}
+
+            }
+        });
 
         Button createActivityBtn = (Button) findViewById(R.id.createEvent_MyEvent);
         createActivityBtn.setOnClickListener(new View.OnClickListener() {

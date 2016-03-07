@@ -78,7 +78,7 @@ public class CreateEvents extends AppCompatActivity {
         }
 
         public String getString(){
-            return this.mDate + " | " + this.mActName + " | " + this.mType;
+            return this.mDate + "|" + this.mActName + "|" + this.mType;
         }
 
         protected Boolean doInBackground(Void... params) {
