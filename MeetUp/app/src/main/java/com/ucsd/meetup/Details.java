@@ -32,6 +32,8 @@ public class Details extends AppCompatActivity {
         TextView where = (TextView) findViewById(R.id.where);
         TextView desc = (TextView) findViewById(R.id.descrip);
         TextView type = (TextView) findViewById(R.id.type);
+
+        /* pull selected event from Parse */
         ParseQuery<ParseObject> query = ParseQuery.getQuery("TempEvents");
         try {
              parseList = query.find();
@@ -52,6 +54,7 @@ public class Details extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        /* display the event details */
         String mDate = parseList2.get(0).getString("Date");
         String mName = parseList2.get(0).getString("Name");
         String mWhere = parseList2.get(0).getString("Location");
@@ -64,8 +67,9 @@ public class Details extends AppCompatActivity {
         desc.setText("Description: " + mDesc);
         type.setText("Type: " + mType);
 
+        /* join button if user wants to join the event */
         temp = new CreateTempEvent(mName, mDate, mType);
-        Button joinBtn = (Button) findViewById(R.id.joinBtn);
+        Button joinBtn = (Button) findViewById(R.id.quitBtn);
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,13 +78,26 @@ public class Details extends AppCompatActivity {
         });
     }
 
+    /*  add the event to the current user's events field */
     public void addToUserEvents(CreateTempEvent event){
         /* store into current user's events */
         ParseUser user = ParseUser.getCurrentUser();
         List<String> list = user.getList("events");
-        String[] myEvents = list.toArray(new String[list.size()+1]);
-        myEvents[list.size()] = event.getString();
-        user.put("events", Arrays.asList(myEvents));
+        List<String> list2 = user.getList("eventsByType");
+        String[] myEventsByDate;
+        String[] myEventsByType;
+        if(list != null) {
+            myEventsByDate = list.toArray(new String[list.size() + 1]);
+            myEventsByType = list2.toArray(new String[list2.size() + 1]);
+            myEventsByDate[list.size()] = event.getEventByDate();
+            myEventsByType[list2.size()] = event.getEventByType();
+        }
+        else{
+            myEventsByDate = new String[]{event.getEventByDate()};
+            myEventsByType = new String[]{event.getEventByType()};
+        }
+        user.put("events", Arrays.asList(myEventsByDate));
+        user.put("eventsByType", Arrays.asList(myEventsByType));
         user.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -95,6 +112,7 @@ public class Details extends AppCompatActivity {
         });
     }
 
+    /* class to assist in adding event to user's events */
     public class CreateTempEvent{
 
         private final String mActName, mDate, mType;
@@ -105,8 +123,12 @@ public class Details extends AppCompatActivity {
             mType = type;
         }
 
-        public String getString() {
-            return this.mDate + " | " + this.mActName + " | " + this.mType;
+        public String getEventByDate() {
+            return this.mDate + "|" + this.mActName + "|" + this.mType;
+        }
+
+        public String getEventByType() {
+            return this.mType + "|" + this.mActName + "|" + this.mDate;
         }
     }
 }
