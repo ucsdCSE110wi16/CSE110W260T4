@@ -27,8 +27,6 @@ public class CreateAccountLoginTest {
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule(LoginActivity.class);
 
     @Test
-//EditText fullNamein, emailIn, cityIn, stateIn, passwordIn, zipIn
-
     public void createLogin() {
 
         /* Create Account */
@@ -40,6 +38,12 @@ public class CreateAccountLoginTest {
         onView(withId(R.id.stateIn)).perform(replaceText("CA"));
         onView(withId(R.id.passwordIn)).perform(replaceText("123123"));
         onView(withId(R.id.zipIn)).perform(replaceText("92092"));
+
+
+        /* Logout to Homescreen */
+        onView(withId(R.id.logoutButton)).perform(click());
+        onView(withId(R.id.email_sign_in_button)).check(matches(withText("Log In")));
+
 
     }
 
