@@ -27,7 +27,6 @@ public class LoginEditProfileTest {
         onView(withId(R.id.password)).perform(replaceText("123123"));
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
-
         /* Edit Profile */
         onView(withId(R.id.profileButton)).perform(click());
         onView(withId(R.id.fullNameIn)).perform(replaceText("FullNameTest"));
@@ -36,21 +35,16 @@ public class LoginEditProfileTest {
         onView(withId(R.id.zipIn)).perform(replaceText("ZipTest"));
         onView(withId(R.id.editBtn)).perform(click());
 
-
         /* Check that Edits have been confirmed */
         onView(withId(R.id.profileButton)).perform(click());
         onView(withId(R.id.fullNameIn)).check(matches(withText("FullNameTest")));
-        onView(withId(R.id.fullNameIn)).check(matches(withText("CityTest")));
-        onView(withId(R.id.fullNameIn)).check(matches(withText("StateTest")));
-        onView(withId(R.id.fullNameIn)).check(matches(withText("ZipTest")));
+        onView(withId(R.id.cityIn)).check(matches(withText("CityTest")));
+        onView(withId(R.id.stateIn)).check(matches(withText("StateTest")));
+        onView(withId(R.id.zipIn)).check(matches(withText("ZipTest")));
         onView(withId(R.id.editBtn)).perform(click());
-
 
         /* Logout to homescreen */
         onView(withId(R.id.logoutButton)).perform(click());
         onView(withId(R.id.email_sign_in_button)).check(matches(withText("Log In")));
-
-
-
     }
 }

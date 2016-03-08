@@ -27,11 +27,12 @@ public class LoginTest {
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule(LoginActivity.class);
 
     @Test
-    public void createLogin() {
+    public void login() {
+        /* Basic Login Functionality */
         onView(withId(R.id.email)).perform(replaceText("test@ucsd.edu"));
         onView(withId(R.id.password)).perform(replaceText("123123"));
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
-        onView(withId(R.id.email_sign_in_button)).perform(click());
+        onView(withId(R.id.logoutButton)).perform(click());
     }
 }

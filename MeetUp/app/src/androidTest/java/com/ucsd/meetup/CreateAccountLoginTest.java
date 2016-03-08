@@ -39,25 +39,14 @@ public class CreateAccountLoginTest {
         onView(withId(R.id.passwordIn)).perform(replaceText("123123"));
         onView(withId(R.id.zipIn)).perform(replaceText("92092"));
 
+        /* Creates the Account for the first time */
+        onView(withId(R.id.createBtn)).perform(click());
+
+        /* Cancels the create account if already created */
+        onView(withId(R.id.cancelBtn)).perform(click());
 
         /* Logout to Homescreen */
-        onView(withId(R.id.logoutButton)).perform(click());
-        onView(withId(R.id.email_sign_in_button)).check(matches(withText("Log In")));
-
-
+//        onView(withId(R.id.logoutButton)).perform(click());
+//        onView(withId(R.id.email_sign_in_button)).check(matches(withText("Log In")));
     }
-
-// Field Names: actName, loc, date, type, description
-// Button Name: createBtn
-//    public void checkCreateEvent() {
-//        onView(withId(R.id.actName)).perform(replaceText("activityName"));
-//        onView(withId(R.id.loc)).perform(replaceText("loc"));
-//        onView(withId(R.id.date)).perform(replaceText("date"));
-//        onView(withId(R.id.type)).perform(replaceText("type"));
-//        onView(withId(R.id.description)).perform(replaceText("description"));
-//
-//        onView(withId(R.id.createBtn)).perform(click());
-//    }
-
-
 }
