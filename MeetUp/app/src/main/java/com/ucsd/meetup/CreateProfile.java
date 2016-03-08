@@ -10,8 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 
 
 import com.parse.ParseException;
@@ -160,7 +158,7 @@ public class CreateProfile extends AppCompatActivity {
                     if (e == null) {
                         Log.d("username", "Sign up successful");
 //                        startActivity(new Intent(CreateProfile.this, CreateEvents.class));
-                        startActivity(new Intent(CreateProfile.this, MyEvent.class));
+                        startActivity(new Intent(CreateProfile.this, MyEvents.class));
                     } else {
                         Log.d("username", "Sign up failed\n");
                         e.printStackTrace();
