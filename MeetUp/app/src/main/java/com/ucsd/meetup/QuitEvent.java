@@ -18,8 +18,8 @@ import java.util.List;
 public class QuitEvent extends AppCompatActivity {
     private List<ParseObject> parseList = new ArrayList<>(1000);
     private List<ParseObject> parseList2 = new ArrayList<>(1000);
-    private String eventToDelete;
-    private List<String> eventsList;
+    private String eventToDeleteByDate, eventToDeleteByType;
+    private List<String> eventsList, eventsListByType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,8 @@ public class QuitEvent extends AppCompatActivity {
         TextView where = (TextView) findViewById(R.id.where);
         TextView desc = (TextView) findViewById(R.id.descrip);
         TextView type = (TextView) findViewById(R.id.type);
+
+        /* pull the selected event from Parse */
         ParseQuery<ParseObject> query = ParseQuery.getQuery("TempEvents");
         try {
             parseList = query.find();
@@ -50,6 +52,7 @@ public class QuitEvent extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        /* display the event details */
         String mDate = parseList2.get(0).getString("Date");
         String mName = parseList2.get(0).getString("Name");
         String mWhere = parseList2.get(0).getString("Location");
@@ -64,13 +67,17 @@ public class QuitEvent extends AppCompatActivity {
 
         ParseUser currUser = ParseUser.getCurrentUser();
         eventsList = currUser.getList("events");
-        eventToDelete = mDate + "|" + mName + "|" + mType;
+        eventsListByType = currUser.getList("eventsByType");
+        eventToDeleteByDate = mDate + "|" + mName + "|" + mType;
+        eventToDeleteByType = mType + "|" + mName + "|" + mDate;
 
+        /* quit button if user wants to leave event */
         Button quitBtn = (Button) findViewById(R.id.quitBtn);
         quitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eventsList.remove(eventToDelete);
+                eventsList.remove(eventToDeleteByDate);
+                eventsListByType.remove(eventToDeleteByType);
                 startActivity(new Intent(QuitEvent.this, MyEvents.class));
             }
         });

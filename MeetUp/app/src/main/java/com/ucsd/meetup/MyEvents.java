@@ -16,6 +16,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -32,22 +33,40 @@ public class MyEvents extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myevent);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-
-
+        /* populate the list with current User's events */
         mainListView = (ListView) findViewById(R.id.eventsList);
         ParseUser currUser = ParseUser.getCurrentUser();
         eventsList = currUser.getList("events");
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, eventsList);
-        mainListView.setAdapter(adapter);
+        if(eventsList != null) {
+            Collections.sort(eventsList);
+            ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, eventsList);
+            mainListView.setAdapter(adapter);
+        }
 
+        /* populate filter */
         Spinner spinner = (Spinner) findViewById(R.id.filter);
         ArrayAdapter<CharSequence> filterAdapter = ArrayAdapter.createFromResource(this, R.array.filterArray, android.R.layout.simple_spinner_item);
         filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(filterAdapter);
 
+        /* decide which filter is being use */
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+                if(item.toString().equals("Date"))
+                    listByDate();
+                if(item.toString().equals("Type"))
+                    listByType();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        /* Display details about the event when User clicks it */
         mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -55,33 +74,32 @@ public class MyEvents extends AppCompatActivity {
                 String date = "";
                 String name = "";
                 String type = "";
-                List<ParseObject> listOfEvents = new ArrayList<>();
+
                 int i = 0;
-                while(item.charAt(i) != '|'){
+                while (item.charAt(i) != '|') {
                     date += item.charAt(i);
                     i++;
                 }
                 i++;
-                while(item.charAt(i) != '|'){
+                while (item.charAt(i) != '|') {
                     name += item.charAt(i);
                     i++;
                 }
                 i++;
-                while(i < item.length()){
+                while (i < item.length()) {
                     type += item.charAt(i);
                     i++;
                 }
-                //if(listOfEvents.size() == 1){
+
                 ParseObject object = new ParseObject("TempEvents");
                 object.put("Date", date);
                 object.put("Name", name);
                 object.saveInBackground();
                 startActivity(new Intent(MyEvents.this, QuitEvent.class));
-                //}
-
             }
         });
 
+        /* create button will pull up Create Events page */
         Button createActivityBtn = (Button) findViewById(R.id.createEvent_MyEvent);
         createActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +108,7 @@ public class MyEvents extends AppCompatActivity {
             }
         });
 
+        /* join button will pull up Join Events page */
         Button joinBtn = (Button)findViewById(R.id.events);
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +117,7 @@ public class MyEvents extends AppCompatActivity {
             }
         });
 
+        /* logout the user */
         Button logoutBtn = (Button) findViewById(R.id.logoutButton);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,20 +127,27 @@ public class MyEvents extends AppCompatActivity {
             }
         });
     }
-//    public void goToCreateEvent(View view) {
-    public void goToCreateEvent() {
 
-        Intent intent = new Intent(this, CreateEvents.class);
-        startActivity(intent);
+    /* populate the list by dates */
+    public void listByDate(){
+        mainListView = (ListView) findViewById(R.id.eventsList);
+        ParseUser currUser = ParseUser.getCurrentUser();
+        eventsList = currUser.getList("events");
+        if(!eventsList.isEmpty()) {
+            Collections.sort(eventsList);
+            ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, eventsList);
+            mainListView.setAdapter(adapter);
+        }
     }
-//    public void createActivity(View view) {
-//        // do something in response to button
-//        Intent intent = new Intent(this, CreateEvent.class );
-//        startActivity(intent);
-//    }
-
-
-
-//    goToCreateEvent
-
+    /* populate the list by type */
+    public void listByType(){
+        mainListView = (ListView) findViewById(R.id.eventsList);
+        ParseUser currUser = ParseUser.getCurrentUser();
+        eventsList = currUser.getList("eventsByType");
+        if(!eventsList.isEmpty()) {
+            Collections.sort(eventsList);
+            ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, eventsList);
+            mainListView.setAdapter(adapter);
+        }
+    }
 }
