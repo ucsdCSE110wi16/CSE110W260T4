@@ -29,10 +29,13 @@ public class LoginTest {
     @Test
     public void login() {
         /* Basic Login Functionality */
-        onView(withId(R.id.email)).perform(replaceText("test@ucsd.edu"));
-        onView(withId(R.id.password)).perform(replaceText("123123"));
+        onView(withId(R.id.email)).perform(replaceText("a@a.com"));
+        onView(withId(R.id.password)).perform(replaceText("aaaaaa"));
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
+        /* Check to see if returned to landing page */
         onView(withId(R.id.logoutButton)).perform(click());
+        onView(withId(R.id.email_sign_in_button)).check(matches(withText("Log In")));
+
     }
 }

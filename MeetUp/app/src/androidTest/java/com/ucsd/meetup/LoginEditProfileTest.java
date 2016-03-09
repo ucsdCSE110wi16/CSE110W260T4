@@ -23,8 +23,8 @@ public class LoginEditProfileTest {
     @Test
     public void loginAndEditProfile() {
         /* Login */
-        onView(withId(R.id.email)).perform(replaceText("test@ucsd.edu"));
-        onView(withId(R.id.password)).perform(replaceText("123123"));
+        onView(withId(R.id.email)).perform(replaceText("a@a.com"));
+        onView(withId(R.id.password)).perform(replaceText("aaaaaa"));
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
         /* Edit Profile */

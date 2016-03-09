@@ -47,7 +47,7 @@ public class EditProfile extends AppCompatActivity {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
 //        query.whereEqualTo("objectId", (String)(currentUser.getObjectId()));
 //        query.getInBackground((String)(currentUser.getObjectId()), new GetCallback<ParseObject>() {
-        query.getInBackground("88mQhJb3Bj", new GetCallback<ParseObject>() {
+        query.getInBackground((String)(currentUser.getObjectId()), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     System.out.println("Retrieved " + object.getString("fullName") + " scores");
@@ -55,8 +55,6 @@ public class EditProfile extends AppCompatActivity {
                     ((EditText) findViewById(R.id.cityIn)).setText(object.getString("city"), TextView.BufferType.EDITABLE);
                     ((EditText) findViewById(R.id.stateIn)).setText(object.getString("state"), TextView.BufferType.EDITABLE);
                     ((EditText) findViewById(R.id.zipIn)).setText(object.getString("zip"), TextView.BufferType.EDITABLE);
-//                    ((EditText) findViewById(R.id.emailIn)).setText(object.getString("email"), TextView.BufferType.EDITABLE);
-//                    ((EditText) findViewById(R.id.passwordIn)).setText(object.getString("password"), TextView.BufferType.EDITABLE);
                     System.out.println("Retrieved " + object.getString("fullName") + " scores");
 
                 } else {
@@ -85,7 +83,7 @@ public class EditProfile extends AppCompatActivity {
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditProfile.this, MyEvent.class));
+                startActivity(new Intent(EditProfile.this, MyEvents.class));
             }
         });
 
@@ -126,7 +124,7 @@ public class EditProfile extends AppCompatActivity {
                     user.saveInBackground();
                     System.out.println("ATTEMPTING TO Edit!");
 
-                    startActivity(new Intent(EditProfile.this, MyEvent.class));
+                    startActivity(new Intent(EditProfile.this, MyEvents.class));
                 }
             }
         });

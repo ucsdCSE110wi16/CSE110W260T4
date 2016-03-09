@@ -40,8 +40,10 @@ public class MyEvents extends AppCompatActivity {
         mainListView = (ListView) findViewById(R.id.eventsList);
         ParseUser currUser = ParseUser.getCurrentUser();
         eventsList = currUser.getList("events");
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, eventsList);
-        mainListView.setAdapter(adapter);
+        if(!eventsList.isEmpty()) {
+            ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, eventsList);
+            mainListView.setAdapter(adapter);
+        }
 
         Spinner spinner = (Spinner) findViewById(R.id.filter);
         ArrayAdapter<CharSequence> filterAdapter = ArrayAdapter.createFromResource(this, R.array.filterArray, android.R.layout.simple_spinner_item);
@@ -104,6 +106,13 @@ public class MyEvents extends AppCompatActivity {
             public void onClick(View v) {
                 ParseUser.getCurrentUser().logOut();
                 startActivity(new Intent(MyEvents.this, LoginActivity.class));
+            }
+        });
+        Button profileBtn = (Button) findViewById(R.id.profileButton);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MyEvents.this, EditProfile.class));
             }
         });
     }
