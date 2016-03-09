@@ -28,16 +28,18 @@ public class CreateEvents extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /* button to create event after user has inputted details */
         Button createBtn = (Button)findViewById(R.id.createBtn);
         createBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 attemptCreate();
-//                startActivity(new Intent(CreateEvents.this, MyEvent.class));
+//                startActivity(new Intent(CreateEvents.this, MyEvents.class));
             }
         });
     }
 
+    /* create the event, add it to Parse, and add it to user's events */
     public void attemptCreate(){
         /* grab user input */
         mActName = ((EditText) findViewById(R.id.actName)).getText().toString();
@@ -53,15 +55,19 @@ public class CreateEvents extends AppCompatActivity {
         /* store into current user's events */
         ParseUser user = ParseUser.getCurrentUser();
         List<String> list = user.getList("events");
-        String[] myEvents = list.toArray(new String[list.size()+1]);
-        myEvents[list.size()] = event.getString();
-        user.put("events", Arrays.asList(myEvents));
+        List<String> list2 = user.getList("eventsByType");
+        String[] myEventsByDate = list.toArray(new String[list.size()+1]);
+        String[] myEventsByType = list2.toArray(new String[list2.size()+1]);
+        myEventsByDate[list.size()] = event.getEventByDate();
+        myEventsByType[list2.size()] = event.getEventByType();
+        user.put("events", Arrays.asList(myEventsByDate));
+        user.put("eventsByType", Arrays.asList(myEventsByType));
         user.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
                     /* go back to main page */
-                    startActivity(new Intent(CreateEvents.this, MyEvent.class));
+                    startActivity(new Intent(CreateEvents.this, MyEvents.class));
                 }
                 else{
                     Log.d("events", e.getMessage());
@@ -69,6 +75,8 @@ public class CreateEvents extends AppCompatActivity {
             }
         });
     }
+
+    /* class to assist in creating an event */
     public class CreateEventTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mActName, mLoc, mDate, mType, mDesc;
@@ -77,11 +85,12 @@ public class CreateEvents extends AppCompatActivity {
             mActName = name; mLoc = loc; mDate = date; mType = type; mDesc = desc;
         }
 
-        public String getString(){
-            String retString = this.mActName + ", " + this.mDate + ", " + this.mType;
-            return retString;
+        public String getEventByDate(){
+            return this.mDate + "|" + this.mActName + "|" + this.mType;
         }
-
+        public String getEventByType(){
+            return this.mType + "|" + this.mActName + "|" + this.mDate;
+        }
         protected Boolean doInBackground(Void... params) {
             ParseObject events = new ParseObject("Events");
             events.put("Name", mActName);

@@ -2,7 +2,6 @@
 <resources>
     <string-array name="filterArray">
         <item>Date</item>
-        <item>Name</item>
         <item>Type</item>
     </string-array>
 </resources>

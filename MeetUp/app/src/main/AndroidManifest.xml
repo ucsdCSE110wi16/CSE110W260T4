@@ -15,13 +15,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
-        android:name="com.parse.APPLICATION_ID"
-        android:value="@string/parse_app_id" />
+            android:name="com.parse.APPLICATION_ID"
+            android:value="@string/parse_app_id" />
         <meta-data
-        android:name="com.parse.CLIENT_KEY"
-        android:value="@string/parse_client_key" />
+            android:name="com.parse.CLIENT_KEY"
+            android:value="@string/parse_client_key" />
 
         <activity
             android:name=".LoginActivity"
@@ -47,23 +46,21 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- Create Event Activity -->
         <activity
-            android:name=".MyEvent"
+            android:name=".MyEvents"
             android:label="title_activity_my_event"
-            android:theme="@style/AppTheme.NoActionBar"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
- <!-- Edit Profile -->
-        <activity
-            android:name=".EditProfile"
-            android:label="Profile"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!--android:value="@integer/google_play_services_version"-->
-
+        <activity android:name=".JoinEvents" />
+        <activity android:name=".Details" />
+        <activity android:name=".QuitEvent"></activity>
     </application>
 
 </manifest>
