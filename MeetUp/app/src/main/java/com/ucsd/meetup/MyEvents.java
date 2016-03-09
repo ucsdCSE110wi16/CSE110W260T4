@@ -126,6 +126,13 @@ public class MyEvents extends AppCompatActivity {
                 startActivity(new Intent(MyEvents.this, LoginActivity.class));
             }
         });
+        Button profileBtn = (Button) findViewById(R.id.profileButton);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MyEvents.this, EditProfile.class));
+            }
+        });
     }
 
     /* populate the list by dates */

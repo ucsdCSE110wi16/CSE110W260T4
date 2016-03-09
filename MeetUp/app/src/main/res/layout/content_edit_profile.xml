@@ -39,29 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Email"
-        android:id="@+id/email"
-        android:layout_below="@+id/zipIn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/emailIn"
-        android:layout_below="@+id/email"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:width="500dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="City"
         android:id="@+id/city"
         android:layout_below="@+id/fullNameIn"
@@ -95,38 +72,17 @@
         android:layout_below="@+id/state"
         android:layout_toRightOf="@+id/cityIn" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Password"
-        android:id="@+id/Password"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/emailIn" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/passwordIn"
-        android:layout_below="@+id/Password"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:width="500dp" />
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Edit"
         android:id="@+id/editBtn"
         android:width="100dp"
-        android:layout_below="@+id/passwordIn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="175dp" />
+        android:layout_marginLeft="175dp"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/zipIn" />
 
     <Button
         android:layout_width="match_parent"
@@ -134,10 +90,11 @@
         android:text="Cancel"
         android:id="@+id/cancelBtn"
         android:width="100dp"
-        android:layout_below="@+id/passwordIn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginRight="175dp" />
+        android:layout_marginRight="175dp"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/zipIn" />
 
     <TextView
         android:layout_width="wrap_content"

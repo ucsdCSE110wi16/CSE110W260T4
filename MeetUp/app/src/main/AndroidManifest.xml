@@ -48,11 +48,14 @@
         <activity
             android:name=".MyEvents"
             android:label="title_activity_my_event"
+            android:theme="@style/AppTheme.NoActionBar"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+
+        <!-- Edit Profile -->
+        <activity
+            android:name=".EditProfile"
+            android:label="Profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!--
- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
 
         <meta-data
             android:name="com.google.android.gms.version"
