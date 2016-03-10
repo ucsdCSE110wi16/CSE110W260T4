@@ -34,7 +34,7 @@ public class LoginEditProfileLogoutTest {
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
         /* Edit Profile */
-        onView(withId(R.id.profile)).perform(click());
+        onView(withId(R.id.profileButton)).perform(click());
         onView(withId(R.id.fullNameIn)).perform(replaceText("FullNameTest"));
         onView(withId(R.id.cityIn)).perform(replaceText("CityTest"));
         onView(withId(R.id.stateIn)).perform(replaceText("StateTest"));
@@ -42,7 +42,7 @@ public class LoginEditProfileLogoutTest {
         onView(withId(R.id.editBtn)).perform(click());
 
         /* Check that Edits have been confirmed */
-        onView(withId(R.id.profile)).perform(click());
+        onView(withId(R.id.profileButton)).perform(click());
         onView(withId(R.id.fullNameIn)).check(matches(withText("FullNameTest")));
         onView(withId(R.id.cityIn)).check(matches(withText("CityTest")));
         onView(withId(R.id.stateIn)).check(matches(withText("StateTest")));
