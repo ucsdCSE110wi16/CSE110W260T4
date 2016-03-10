@@ -21,21 +21,36 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LoginTest {
+public class LoginEditProfileLogoutTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule(LoginActivity.class);
 
     @Test
-    public void login() {
-        /* Basic Login Functionality */
+    public void loginAndEditProfile() {
+        /* Login */
         onView(withId(R.id.email)).perform(replaceText("a@a.com"));
         onView(withId(R.id.password)).perform(replaceText("aaaaaa"));
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
-        /* Check to see if returned to landing page */
+        /* Edit Profile */
+        onView(withId(R.id.profile)).perform(click());
+        onView(withId(R.id.fullNameIn)).perform(replaceText("FullNameTest"));
+        onView(withId(R.id.cityIn)).perform(replaceText("CityTest"));
+        onView(withId(R.id.stateIn)).perform(replaceText("StateTest"));
+        onView(withId(R.id.zipIn)).perform(replaceText("ZipTest"));
+        onView(withId(R.id.editBtn)).perform(click());
+
+        /* Check that Edits have been confirmed */
+        onView(withId(R.id.profile)).perform(click());
+        onView(withId(R.id.fullNameIn)).check(matches(withText("FullNameTest")));
+        onView(withId(R.id.cityIn)).check(matches(withText("CityTest")));
+        onView(withId(R.id.stateIn)).check(matches(withText("StateTest")));
+        onView(withId(R.id.zipIn)).check(matches(withText("ZipTest")));
+        onView(withId(R.id.editBtn)).perform(click());
+
+        /* Logout to homescreen */
         onView(withId(R.id.logoutButton)).perform(click());
         onView(withId(R.id.email_sign_in_button)).check(matches(withText("Log In")));
-
     }
 }
