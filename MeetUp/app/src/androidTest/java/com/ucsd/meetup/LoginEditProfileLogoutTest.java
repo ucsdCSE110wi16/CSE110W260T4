@@ -27,13 +27,30 @@ public class LoginEditProfileLogoutTest {
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule(LoginActivity.class);
 
     @Test
-    public void checkLogin() {
-        onView(withId(R.id.email)).perform(replaceText("test@ucsd.edu"));
-        onView(withId(R.id.password)).perform(replaceText("123123"));
+    public void loginAndEditProfile() {
+        /* Login */
+        onView(withId(R.id.email)).perform(replaceText("a@a.com"));
+        onView(withId(R.id.password)).perform(replaceText("aaaaaa"));
         onView(withId(R.id.email_sign_in_button)).perform(click());
+
+        /* Edit Profile */
+        onView(withId(R.id.profile)).perform(click());
+        onView(withId(R.id.fullNameIn)).perform(replaceText("FullNameTest"));
+        onView(withId(R.id.cityIn)).perform(replaceText("CityTest"));
+        onView(withId(R.id.stateIn)).perform(replaceText("StateTest"));
+        onView(withId(R.id.zipIn)).perform(replaceText("ZipTest"));
+        onView(withId(R.id.editBtn)).perform(click());
+
+        /* Check that Edits have been confirmed */
+        onView(withId(R.id.profile)).perform(click());
+        onView(withId(R.id.fullNameIn)).check(matches(withText("FullNameTest")));
+        onView(withId(R.id.cityIn)).check(matches(withText("CityTest")));
+        onView(withId(R.id.stateIn)).check(matches(withText("StateTest")));
+        onView(withId(R.id.zipIn)).check(matches(withText("ZipTest")));
+        onView(withId(R.id.editBtn)).perform(click());
+
+        /* Logout to homescreen */
+        onView(withId(R.id.logoutButton)).perform(click());
+        onView(withId(R.id.email_sign_in_button)).check(matches(withText("Log In")));
     }
-
-
-
-
 }
