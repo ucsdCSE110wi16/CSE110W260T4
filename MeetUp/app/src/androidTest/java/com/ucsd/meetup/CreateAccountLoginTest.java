@@ -21,6 +21,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
+
+// Note: Working Test
 public class CreateAccountLoginTest {
 
     @Rule
@@ -47,6 +49,6 @@ public class CreateAccountLoginTest {
 
         /* Logout to Homescreen */
 //        onView(withId(R.id.logoutButton)).perform(click());
-//        onView(withId(R.id.email_sign_in_button)).check(matches(withText("Log In")));
+        onView(withId(R.id.email_sign_in_button)).check(matches(withText("Log In")));
     }
 }

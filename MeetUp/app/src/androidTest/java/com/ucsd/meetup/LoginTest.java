@@ -21,6 +21,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
+
+// Note: Test worked.
 public class LoginTest {
 
     @Rule

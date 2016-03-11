@@ -22,6 +22,16 @@ import static org.hamcrest.core.IsAnything.anything;
 /**
  * Created by AnnLonea on 3/7/16.
  */
+
+// Note: Test failed.
+/*
+android.support.test.espresso.NoMatchingViewException: No views in hierarchy found matching: with id: com.ucsd.meetup:id/eventsList
+
+View Hierarchy:
++>DecorView{id=-1, visibility=VISIBLE, width=1080, height=1920, has-focus=true, has-focusable=true, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=1}
+
+
+ */
 public class LoginCreateEventLogoutTest {
 
     @Rule

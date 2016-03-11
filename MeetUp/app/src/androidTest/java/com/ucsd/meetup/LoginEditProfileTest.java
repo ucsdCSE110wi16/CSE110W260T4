@@ -15,6 +15,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * Created by Lawrence on 3/6/2016.
  */
+
+// Note: Test works
 public class LoginEditProfileTest {
 
     @Rule
