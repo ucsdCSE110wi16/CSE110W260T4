@@ -46,6 +46,7 @@ public class JoinEvents extends AppCompatActivity {
         for (int i = 0; i < parseList.size(); i++) {
             theList.add(parseList.get(i).getString("Date") + "|" + parseList.get(i).getString("Name") + "|" + parseList.get(i).getString("Type"));
         }
+        Collections.sort(theList);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, theList);
         joinListView.setAdapter(adapter);
 
@@ -117,7 +118,7 @@ public class JoinEvents extends AppCompatActivity {
         for (int i = 0; i < parseList.size(); i++) {
             theList.add(parseList.get(i).getString("Date") + "|" + parseList.get(i).getString("Name") + "|" + parseList.get(i).getString("Type"));
         }
-
+        Collections.sort(theList);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, theList);
         joinListView.setAdapter(adapter);
     }
@@ -134,7 +135,7 @@ public class JoinEvents extends AppCompatActivity {
         for (int i = 0; i < parseList.size(); i++) {
             theList.add(parseList.get(i).getString("Type") + "|" + parseList.get(i).getString("Name") + "|" + parseList.get(i).getString("Date"));
         }
-
+        Collections.sort(theList);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.content_simplerow, theList);
         joinListView.setAdapter(adapter);
     }

@@ -16,6 +16,8 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Details extends AppCompatActivity {
@@ -91,6 +93,8 @@ public class Details extends AppCompatActivity {
             myEventsByType = list2.toArray(new String[list2.size() + 1]);
             myEventsByDate[list.size()] = event.getEventByDate();
             myEventsByType[list2.size()] = event.getEventByType();
+            Collections.sort(Arrays.asList(myEventsByDate));
+            Collections.sort(Arrays.asList(myEventsByType));
         }
         else{
             myEventsByDate = new String[]{event.getEventByDate()};

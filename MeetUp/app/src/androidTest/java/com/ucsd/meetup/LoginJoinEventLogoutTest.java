@@ -23,7 +23,7 @@ import static org.hamcrest.core.IsAnything.anything;
  * Created by AnnLonea on 3/7/16.
  */
 
-// Note: Not working.
+// Note: Test works now. Mark 3-11-16
 /*
     android.support.test.espresso.NoMatchingViewException: No views in hierarchy found matching: with id: com.ucsd.meetup:id/eventsList
 
@@ -45,11 +45,21 @@ public class LoginJoinEventLogoutTest {
 
         /* JoinEvent */
         onView(withId(R.id.events)).perform(click());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         onData(anything()).inAdapterView(withId(R.id.joinEventsList)).atPosition(0).perform(click());
         onView(withId(R.id.quitBtn)).perform(click());
 
         /* Check that event details have been confirmed */
-        onData(anything()).inAdapterView(withId(R.id.eventsList)).atPosition(0).perform(click());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onData(anything()).inAdapterView(withId(R.id.eventsList)).atPosition(0).check(matches(withText("03/18/16|Football|Sport")));
 
         /* Logout to homescreen */
         onView(withId(R.id.logoutButton)).perform(click());

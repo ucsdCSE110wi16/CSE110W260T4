@@ -16,6 +16,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CreateEvents extends AppCompatActivity {
@@ -56,10 +57,20 @@ public class CreateEvents extends AppCompatActivity {
         ParseUser user = ParseUser.getCurrentUser();
         List<String> list = user.getList("events");
         List<String> list2 = user.getList("eventsByType");
-        String[] myEventsByDate = list.toArray(new String[list.size()+1]);
-        String[] myEventsByType = list2.toArray(new String[list2.size()+1]);
-        myEventsByDate[list.size()] = event.getEventByDate();
-        myEventsByType[list2.size()] = event.getEventByType();
+        String[] myEventsByDate;
+        String[] myEventsByType;
+        if(list != null) {
+            myEventsByDate = list.toArray(new String[list.size() + 1]);
+            myEventsByType = list2.toArray(new String[list2.size() + 1]);
+            myEventsByDate[list.size()] = event.getEventByDate();
+            myEventsByType[list2.size()] = event.getEventByType();
+            Collections.sort(Arrays.asList(myEventsByDate));
+            Collections.sort(Arrays.asList(myEventsByType));
+        }
+        else{
+            myEventsByDate = new String[]{event.getEventByDate()};
+            myEventsByType = new String[]{event.getEventByType()};
+        }
         user.put("events", Arrays.asList(myEventsByDate));
         user.put("eventsByType", Arrays.asList(myEventsByType));
         user.saveInBackground(new SaveCallback() {
