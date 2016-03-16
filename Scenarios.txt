@@ -1,0 +1,28 @@
+File lists the test and a scenario template of what it does.
+
+CreateAccountLoginTest
+Given user has no account, when they click on create account button
+and enter new relevant account details and click on create account
+button, then an account will be created for them with the details.
+
+LoginCreateEventLogout
+Given user has already entered valid login details, when user clicks login
+button and clicks on create event and enters relevant details and
+creates the event and clicks logout, then the event should be
+created and user logged out.
+
+LoginEditProfileLogout
+Given user has already entered valid login details, when user clicks login
+button and clicks on edit profile and edits the relevant details and
+confirms the details and clicks logout, then the profile should be
+created and user logged out.
+
+LoginJoinEventLogout
+Given user has already entered valid login details, when user clicks login
+button and clicks on join event and selects an event to join and
+clicks logout, then the user should have joined the event
+and user should have logged out.
+
+LoginTest
+Given user has already entered valid login details, when user clicks 
+login button, then the user should log in if credentials are valid.
